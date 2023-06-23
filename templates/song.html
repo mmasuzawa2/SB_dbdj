@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="jumbotron">
+  <h1>{{ song.title }}</h1>
+  <span><image src="{{song.image_url}}"</span>
+  <p class="lead">&ndash; {{ song.artist }}</p>
+  <a href="{{song.spotify_url}}">Listen on Spotify</a><br>
+  <form action="/playlists/add-song">
+    Add this song to your playlist
+    <select name="playlist_id">
+      {% for e in playlist %}
+        <option value={{e.id}}>{{e.name}}</option>
+      {% endfor %}
+    </select>
+    <input type="hidden" name="song_id" value="{{song.id}}">
+    &nbsp;<button class="btn btn-primary" type="submit">Add to playlist</button>
+  </form>
+  {% for msg in get_flashed_messages()%}
+  <p>
+    {{msg}}
+  </p>
+  {% endfor %}
+  <br>
+  <form action="/delete_song/{{song.id}}">
+    <button class="btn btn-primary" type="submit">remove song from bookmark</button>
+  </form>
+</div>
+
+{% endblock %}

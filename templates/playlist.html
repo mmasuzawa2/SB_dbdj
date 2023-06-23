@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="jumbotron">
+  <h2>Playlist Name: {{ playlist.name }}</h2>
+  {% if playlist.description %}
+  <p class="lead">{{ playlist.description }}</p>
+  {% endif %}
+  <form action="/delete_playlist/{{playlist.id}}">
+    <button class="btn btn-primary" type="submit">delete this playlist</button>
+  </form>
+</div>
+
+{% for song in songs %}
+    <h4><a href="/songs/{{song.id}}">{{ song.title }}</a> by {{ song.artist }}</h4>
+    <form action="/delete_song/{{playlist.id}}/{{song.id}}">
+      <button class="btn btn-primary" type="submit">remove from playlist</button>
+    </form>
+    <hr>
+{% endfor %}
+
+
+{% endblock %}
+
+

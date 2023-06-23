@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Search Results for "{{query}}"</h2>
+<p><a href="/songs">go back to search</a></p><br>
+
+{% for e in bank %}
+    <span>Album: {{e['album']}}</span><br>
+    <span>Song: {{e['songname']}} by {{e['artist']}}</span><br>
+    <span><image src="{{e['image']}}"></span><br>
+    <a href="{{e['link']}}">Listen to this song on Spotify</a><br>
+    <form action="/songs/add">
+        <input type="hidden" name="id" value="{{e['id']}}">
+        <input type="hidden" name="album" value="{{e['album']}}">
+        <input type="hidden" name="title" value="{{e['songname']}}">
+        <input type="hidden" name="artist" value="{{e['artist']}}">
+        <input type="hidden" name="image" value="{{e['image']}}">
+        <input type="hidden" name="spotify" value="{{e['link']}}">
+        {% if e['id'] in song_id %}
+            <p>&#9989 This song is in your bookmark.</p>
+        {% else %}
+            <button type="submit" class="btn btn-primary">bookmark this song</button>
+        {% endif %}
+    </form>
+<br>
+
+
+{% endfor %}
+
+{% endblock %}

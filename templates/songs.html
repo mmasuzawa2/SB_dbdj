@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% for msg in get_flashed_messages()%}
+  <p>
+    {{msg}}
+  </p>
+  {% endfor %}
+<h4>Get songs from Spotify by querying keywords!</h4>
+<br>
+<form method="POST">
+  {{ form.hidden_tag() }}
+  {% for field in form if field.widget.input_type != 'hidden' %}
+    {{field.label}}
+    {{field}}&nbsp;&nbsp;
+  {% endfor %}
+  &nbsp;<button>look it up!</button>
+</form>
+<br>
+*Spotify requires user authorization to get the token required for the search func. If you are logged out from Spotify, you will be first directed to Spotify Login.
+
+<br><hr>
+
+<h3>Bookmarked songs</h3>
+<ul>
+{% for song in songs %}
+  <li><a href="/songs/{{song.id}}">{{ song.title }}</a> by {{song.artist}}</li>
+{% endfor %}
+</ul>
+
+
+
+{% endblock %}
