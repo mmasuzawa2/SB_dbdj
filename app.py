@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///playlist-app'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
-app.config['SECRET_KEY'] = "mokomichi1"
+app.config['SECRET_KEY'] = "mmichi1"
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.config['TESTING'] = False
 
